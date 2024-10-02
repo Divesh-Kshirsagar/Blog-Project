@@ -1,0 +1,42 @@
+{% extends 'Blogs/base.html' %}
+
+{% block content %}
+<header class=" w-full  bg-[#d9d9d9] py-3">
+    <div class="w-[96%] flex justify-between items-center mx-auto">
+        <div class="w-[130px]"><img src="/static/svg/BlogHub.svg" alt="bloghub logo"></div>
+        <div class="jaldi-bold text-black flex gap-6 items-center">
+            <a href="{% url 'Blogs:blogs' %}">BLOGS</a>
+            <a href="{% url 'Blogs:create' %}">CREATE BLOGS</a>
+            <a href="{% url 'MyUsers:logout' %}"
+                class="hover:text-black hover:bg-[#ffd5ff] text-white bg-black px-4 py-2 rounded-md shadow-sm  focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                onclick="alert('You have been successfully logout.')">logout</a>
+        </div>
+</header>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<div class="container mx-auto py-8">
+    <h2 class="text-3xl text-gray-800 mb-4 text-center aclonica-regular">Your Blogs</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for blog in user_blogs %}
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h3 class="text-2xl font-semibold text-gray-800">
+                <a href="{% url 'Blogs:myblog' blog.id %}" class="hover:underline">{{ blog.title }}</a>
+            </h3>
+            <p class="text-sm text-gray-500">{{ blog.date|date:"F d, Y" }}</p>
+        </div>
+        {% empty %}
+        <p class="text-center text-lg text-gray-600">You haven't published any blogs yet.</p>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock content %}

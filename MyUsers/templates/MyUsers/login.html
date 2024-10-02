@@ -1,0 +1,70 @@
+{% extends 'Blogs/base.html' %}
+{% block content %}
+<main class="flex flex-col h-[100%]">
+    <header class=" w-full  bg-[#d9d9d9] py-3">
+        <div class="w-[96%] flex justify-between items-center mx-auto">
+            <div class="w-[130px]"><img src="/static/svg/BlogHub.svg" alt="bloghub logo"></div>
+            <div class="jaldi-bold text-black flex gap-6 items-center">
+                <a href="{% url 'Blogs:home' %}">HOME</a>
+                <a href="{% url 'Blogs:blogs' %}">BLOGS</a>
+                <a href="{% url 'MyUsers:register' %}"
+                    class="hover:text-black hover:bg-[#ffd5ff] text-white bg-black px-4 py-2 rounded-md shadow-sm  focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">REGISTER</a>
+            </div>
+        </div>
+    </header>
+
+
+
+    <section class="max-w-md mx-auto my-10 p-8 bg-white rounded-lg shadow-md flex-grow flex-shrink-0">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Sign In</h1>
+
+        {% for message in messages %}
+        <div class="p-4 mb-4 text-sm text-white bg-{{ message.level }}-500 rounded-lg" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+
+        <form enctype="multipart/form-data" method="post" class="space-y-6">
+            {% csrf_token %}
+
+            <!-- Username -->
+            <div>
+                <label for="user_name" class="block text-sm font-medium text-gray-700">Username</label>
+                <input required name="user_name" type="text"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <!-- Password -->
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Enter Password</label>
+                <input required name="password" type="password"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <!-- Login Button -->
+            <div>
+                <button type="submit"
+                    class="w-full hover:text-black hover:bg-[#ffd5ff] text-white bg-black px-4 py-2 rounded-md shadow-sm  focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Login
+                </button>
+            </div>
+        </form>
+
+        <!-- Registration Link -->
+        <p class="mt-6 text-sm text-gray-600 text-center">
+            Not registered? <a href="{% url 'MyUsers:register' %}"
+                class="text-indigo-600 hover:text-indigo-500 font-medium">Click here to register.</a>
+        </p>
+    </section>
+
+    <footer id="footer" class="text-center p-8 bg-[#d9d9d9]">
+        <div class="flex gap-2 justify-center mb-5">
+            <img src="/static/img/Instagram.png" alt="" class="size-8">
+            <img src="/static/img/Linkedin.png" alt="" class="size-8">
+            <img src="/static/img/Facebook.png" alt="" class="size-8">
+            <img src="/static/img/Youtube.png" alt="" class="size-8">
+        </div>
+        <p class="text-lg jaldi-regular">Made by Divesh Kshirsagar @2024</p>
+    </footer>
+</main>
+{% endblock content %}

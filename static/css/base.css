@@ -1,0 +1,72 @@
+/* 
+    color palette
+
+    #800080 purple
+    #fff white
+    #0E000E 
+    #ffd5ff light purple
+    #608000 mehandi
+    #008060 
+
+
+*/
+
+
+
+
+/*Model Fixes
+-----------------------------------------------*/
+html{
+    box-sizing: border-box;
+    height: 100%;
+}
+
+*, *:before, *:after{
+    box-sizing: inherit;
+}
+
+body{
+    margin: 0%;
+    height: 100%;
+}
+
+/*Typography
+-----------------------------------------------*/
+html{
+    font-size: 16px;
+}
+
+a{
+    font-size: 1rem;
+}
+
+p{
+    font-size: 1.563rem;
+}
+
+.aclonica-regular {
+    font-family: "Aclonica", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.jaldi-regular {
+    font-family: "Jaldi", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+  
+.jaldi-bold {
+    font-family: "Jaldi", system-ui;
+    font-weight: 700;
+    font-style: normal;
+}
+  
+
+
+/*Global Styles
+-----------------------------------------------*/
+img{
+    width: 100%;
+    height: auto;
+}

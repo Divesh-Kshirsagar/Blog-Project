@@ -1,0 +1,99 @@
+{% extends 'Blogs/base.html' %}
+{% block content %}
+<main class="flex flex-col">
+    <header class=" w-full  bg-[#d9d9d9] py-3">
+        <div class="w-[96%] flex justify-between items-center mx-auto">
+            <div class="w-[130px]"><img src="/static/svg/BlogHub.svg" alt="bloghub logo"></div>
+            <div class="jaldi-bold text-black flex gap-6 items-center">
+                <a href="{% url 'Blogs:home' %}">HOME</a>
+                <a href="{% url 'Blogs:blogs' %}">BLOGS</a>
+                <a href="{% url 'MyUsers:login' %}"
+                    class="hover:text-black hover:bg-[#ffd5ff] text-white bg-black px-4 py-2 rounded-md shadow-sm  focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">SIGN IN</a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="max-w-lg mx-auto my-10 p-8 bg-white rounded-lg shadow-md flex-shrink-0 flex-grow">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Register</h1>
+    
+        {% for message in messages %}
+        <div class="p-4 mb-4 text-sm text-white bg-{{ message.level }}-500 rounded-lg" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    
+        <form enctype="multipart/form-data" method="post" class="space-y-6">
+            {% csrf_token %}
+    
+            <!-- First Name -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label for="first_name" class="block text-sm font-medium text-gray-700">First Name</label>
+                    <input required name="first_name" type="text"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+    
+                <!-- Last Name -->
+                <div>
+                    <label for="last_name" class="block text-sm font-medium text-gray-700">Last Name</label>
+                    <input required name="last_name" type="text"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+            </div>
+    
+            <!-- Username -->
+            <div>
+                <label for="user_name" class="block text-sm font-medium text-gray-700">Username</label>
+                <input required name="user_name" type="text"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+    
+            <!-- Email -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input required name="email" type="email"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+    
+            <!-- Password -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Set Password</label>
+                    <input required name="password" type="password"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+    
+                <!-- Confirm Password -->
+                <div>
+                    <label for="confirm_password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                    <input required name="confirm_password" type="password"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+            </div>
+    
+            <!-- Register Button -->
+            <div>
+                <button type="submit"
+                    class="w-full hover:text-black hover:bg-[#ffd5ff] text-white bg-black px-4 py-2 rounded-md shadow-sm  focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Register
+                </button>
+            </div>
+        </form>
+    
+        <p class="mt-6 text-sm text-gray-600 text-center">
+            Already registered? <a href="{% url 'MyUsers:login' %}"
+                class="text-indigo-600 hover:text-indigo-500 font-medium">Click here to login.</a>
+        </p>
+    </div>
+    
+    <footer id="footer" class="text-center p-8 bg-[#d9d9d9]">
+        <div class="flex gap-2 justify-center mb-5">
+            <img src="/static/img/Instagram.png" alt="" class="size-8">
+            <img src="/static/img/Linkedin.png" alt="" class="size-8">
+            <img src="/static/img/Facebook.png" alt="" class="size-8">
+            <img src="/static/img/Youtube.png" alt="" class="size-8">
+        </div>
+        <p class="text-lg jaldi-regular">Made by Divesh Kshirsagar @2024</p>
+    </footer>
+</main>
+{% endblock content %}

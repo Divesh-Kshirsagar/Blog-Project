@@ -1,0 +1,35 @@
+{% extends 'Blogs/base.html' %}
+
+{% block content %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<!-- Content Section -->
+<div class="max-w-4xl mx-auto my-10 p-8 bg-white rounded-lg shadow-md">
+    <!-- Form Title -->
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Edit Post</h1>
+
+    <!-- CKEditor Form Media -->
+    
+{% block header %}
+    {{ form.media }} 
+{% endblock %}
+    <form method="POST" class="space-y-6" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        
+        <!-- Submit Button -->
+        <button type="submit"
+            class="w-full bg-indigo-600 text-white px-4 py-2 rounded-md shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Submit
+        </button>
+    </form>
+    
+</div>
+
+{% endblock content %}

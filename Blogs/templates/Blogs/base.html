@@ -1,0 +1,56 @@
+{% load static %}
+{% load static tailwind_tags %}
+{% tailwind_css %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Jaldi:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    {% block content %}
+
+    {% endblock content %}
+    <!-- Fixed Button for scrolling to the top -->
+    <button id="scrollToTop"
+        class="fixed bottom-20 right-6 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition"
+        onclick="scrollToTop()">
+        ↑ 
+    </button>
+
+    <!-- Fixed Button for scrolling to the bottom -->
+    <button id="scrollToBottom"
+        class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition"
+        onclick="scrollToBottom()">
+        ↓ 
+    </button>
+
+    <!-- JavaScript to handle scrolling -->
+    <script>
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function scrollToBottom() {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+
+</html>
