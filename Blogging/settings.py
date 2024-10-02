@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'secret_key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -239,7 +239,7 @@ INTERNAL_IPS = [
 
 NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
 
-TAILWIND_DEV_MODE=DEBUG
+# TAILWIND_DEV_MODE=DEBUG
 
 # For changing the redirection from accounts/login
 LOGIN_URL = '/users/login'
