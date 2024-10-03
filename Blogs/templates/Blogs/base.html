@@ -5,64 +5,205 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
-    <script>
-        tailwind.config = {
-          theme: {
-            extend: {
-              colors: {
-                clifford: '#da373d',
-              }
-            }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            clifford: '#da373d',
           }
         }
-      </script>
+      }
+    }
+  </script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Jaldi:wght@400;700&display=swap"
-        rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Jaldi:wght@400;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /*Model Fixes
+-----------------------------------------------*/
+    html {
+      box-sizing: border-box;
+      height: 100%;
+    }
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+
+    body {
+      margin: 0%;
+      height: 100%;
+    }
+
+    /*Typography
+-----------------------------------------------*/
+    html {
+      font-size: 16px;
+    }
+
+    a {
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: 1.563rem;
+    }
+
+    .aclonica-regular {
+      font-family: "Aclonica", system-ui;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .jaldi-regular {
+      font-family: "Jaldi", system-ui;
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    .jaldi-bold {
+      font-family: "Jaldi", system-ui;
+      font-weight: 700;
+      font-style: normal;
+    }
+
+
+
+    /*Global Styles
+-----------------------------------------------*/
+    img {
+      width: 100%;
+      height: auto;
+    }
+
+    #loader-container {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0;
+    }
+
+    .loader-container {
+      text-align: center;
+    }
+
+    .loader {
+      width: 300px;
+      height: 30px;
+      border: 2px solid black;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .loader-bar {
+      height: 100%;
+      width: 0;
+      background-color: black;
+    }
+
+    #loader-text {
+      margin-top: 10px;
+      font-size: 18px;
+      color: black;
+    }
+
+    #content {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
+
+  <!-- Loader Section -->
+  <section id="loader-container">
+    <div class="loader-container">
+      <div class="loader">
+        <div class="loader-bar" id="loader-bar"></div>
+      </div>
+      <p id="loader-text">Loading 0%</p>
+    </div>
+  </section>
+
+  <!-- Page Content -->
+  <div id="content">
     {% block content %}
-
     {% endblock content %}
-    <!-- Fixed Button for scrolling to the top -->
-    <button id="scrollToTop"
-        class="fixed bottom-20 right-6 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition"
-        onclick="scrollToTop()">
-        ↑ 
-    </button>
+  </div>
 
-    <!-- Fixed Button for scrolling to the bottom -->
-    <button id="scrollToBottom"
-        class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition"
-        onclick="scrollToBottom()">
-        ↓ 
-    </button>
+  <!-- Fixed Button for scrolling to the top -->
+  <button id="scrollToTop"
+    class="fixed bottom-20 right-6 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition"
+    onclick="scrollToTop()">
+    ↑
+  </button>
 
-    <!-- JavaScript to handle scrolling -->
-    <script>
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+  <!-- Fixed Button for scrolling to the bottom -->
+  <button id="scrollToBottom"
+    class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition"
+    onclick="scrollToBottom()">
+    ↓
+  </button>
+
+  <!-- JavaScript for Loader and Scroll -->
+  <script>
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    function scrollToBottom() {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      let loaderBar = document.getElementById('loader-bar');
+      let loaderText = document.getElementById('loader-text');
+      let loaderContainer = document.getElementById('loader-container');
+      let content = document.getElementById('content');
+
+      let progress = 0;
+      let interval = setInterval(() => {
+        if (progress < 100) {
+          progress++;
+          loaderBar.style.width = progress + '%';
+          loaderText.textContent = `Loading ${progress}%`;
         }
+      }, 50); // Adjust the speed as needed
 
-        function scrollToBottom() {
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: 'smooth'
-            });
-        }
-    </script>
+      // Once the window is fully loaded
+      window.addEventListener('load', () => {
+        clearInterval(interval);
+        loaderBar.style.width = '100%';
+        loaderText.textContent = `Loading 100%`;
+
+        // Slight delay for better UX before hiding the loader and showing content
+        setTimeout(() => {
+          loaderContainer.style.display = 'none';  // Hide the loader
+          content.style.display = 'block';         // Show the content
+        }, 500);
+      });
+    });
+  </script>
 </body>
 
 </html>
