@@ -239,7 +239,7 @@ INTERNAL_IPS = [
 
 NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
 
-# TAILWIND_DEV_MODE=DEBUG
+TAILWIND_DEV_MODE=DEBUG
 
 # For changing the redirection from accounts/login
 LOGIN_URL = '/users/login'
